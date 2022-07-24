@@ -1,0 +1,200 @@
+:root {
+  --color: #f8fcff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--color);
+}
+
+@font-face {
+  font-family: Barlow;
+  src: url('/src/assets/fonts/Barlow-Black.ttf');
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: Barlow;
+  src: url('/src/assets/fonts/Barlow-ExtraBold.ttf');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: Barlow;
+  src: url('/src/assets/fonts/Barlow-Bold.ttf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Barlow;
+  src: url('/src/assets/fonts/Barlow-SemiBold.ttf');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: Barlow;
+  src: url('/src/assets/fonts/Barlow-Medium.ttf');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Barlow;
+  src: url('/src/assets/fonts/Barlow-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Barlow;
+  src: url('/src/assets/fonts/Barlow-Light.ttf');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: Barlow;
+  src: url('/src/assets/fonts/Barlow-ExtraLight.ttf');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: Barlow;
+  src: url('/src/assets/fonts/Barlow-Thin.ttf');
+  font-weight: 100;
+}
+
+body {
+  font-family: Barlow, sans-serif;
+  font-weight: 500;
+  min-height: 100vh;
+  background: url(/background1.png), #252525;
+  background-attachment: fixed;
+}
+
+body::-webkit-scrollbar {
+  position: relative;
+  width: 8px;
+  height: 0;
+  background: #87878711;
+  z-index: 10;
+}
+
+body::-webkit-scrollbar-corner {
+  display: none;
+}
+body::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #87878769;
+}
+
+.rem-container {
+  max-width: 96%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 60px 0;
+  padding-bottom: 2rem;
+}
+
+.bs-lg {
+  box-shadow: 7px 7px 5px #00000033, -7px -7px 5px #00000024;
+}
+
+.bs-sm {
+  box-shadow: 3px 3px 5px #00000033, -3px -3px 5px #00000024;
+}
+
+.ts-lg {
+  text-shadow: 15px 15px 10px #252525c4;
+}
+
+.ts-sm {
+  text-shadow: 3px 3px 10px #252525c4;
+}
+
+.break-line {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.break-line-2 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.img[lazy='loaded'] {
+  animation: fade 0.5s;
+}
+
+.skt-item {
+  background: linear-gradient(90deg, #444444, #585858, #444444);
+  background-size: 200%;
+  animation: skeleton_linear 3s linear infinite;
+}
+
+.skt-alt {
+  animation: skeleton_alt 1s linear alternate infinite;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes skeleton_linear {
+  0% {
+    background-position: 200%;
+  }
+
+  40% {
+    background-position: 100%;
+  }
+
+  100% {
+    background-position: 0%;
+  }
+}
+
+@keyframes skeleton_alt {
+  0% {
+    background: #363636;
+  }
+  100% {
+    background: #141414;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.min-scroll::-webkit-scrollbar {
+  position: relative;
+  width: 5px;
+  height: 0;
+  background: #25ffff11;
+  z-index: 10;
+}
+
+.min-scroll::-webkit-scrollbar-corner {
+  display: none;
+  position: absolute;
+}
+.min-scroll::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background: #29fcf191;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

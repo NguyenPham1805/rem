@@ -1,0 +1,106 @@
+{
+  "techOrder": [
+    "Html5"
+  ],
+  "html5": {},
+  "inactivityTimeout": 2000,
+  "playbackRates": [],
+  "liveui": false,
+  "children": [
+    "mediaLoader",
+    "posterImage",
+    "textTrackDisplay",
+    "loadingSpinner",
+    "bigPlayButton",
+    "liveTracker",
+    "controlBar",
+    "errorDisplay",
+    "textTrackSettings",
+    "resizeManager"
+  ],
+  "language": "en",
+  "languages": {
+    "en": {
+      "Non-Fullscreen": "Exit Fullscreen"
+    }
+  },
+  "notSupportedMessage": "No compatible source was found for this media.",
+  "normalizeAutoplay": false,
+  "fullscreen": {
+    "options": {
+      "navigationUI": "hide"
+    }
+  },
+  "breakpoints": {},
+  "responsive": false,
+  "audioOnlyMode": false,
+  "audioPosterMode": false,
+  "vhs": {},
+  "hls": {},
+  "sources": [],
+  "tracks": [],
+  "id": "vjs_video_3",
+  "data-v-61543846": "",
+  "src": "/src/assets/you_cant_not_advance.mp4",
+  "width": "0",
+  "autoplay": true,
+  "controls": false,
+  "controlBar": false,
+  "initChildren": false,
+  "createEl": false,
+  "evented": false,
+  "reportTouchActivity": false,
+  "playerOptions": {
+    "techOrder": [
+      "Html5"
+    ],
+    "html5": {},
+    "inactivityTimeout": 2000,
+    "playbackRates": [],
+    "liveui": false,
+    "children": [
+      "mediaLoader",
+      "posterImage",
+      "textTrackDisplay",
+      "loadingSpinner",
+      "bigPlayButton",
+      "liveTracker",
+      "controlBar",
+      "errorDisplay",
+      "textTrackSettings",
+      "resizeManager"
+    ],
+    "language": "en",
+    "languages": {
+      "en": {
+        "Non-Fullscreen": "Exit Fullscreen"
+      }
+    },
+    "notSupportedMessage": "No compatible source was found for this media.",
+    "normalizeAutoplay": false,
+    "fullscreen": {
+      "options": {
+        "navigationUI": "hide"
+      }
+    },
+    "breakpoints": {},
+    "responsive": false,
+    "audioOnlyMode": false,
+    "audioPosterMode": false,
+    "vhs": {},
+    "hls": {},
+    "sources": [],
+    "tracks": [],
+    "id": "vjs_video_3",
+    "data-v-61543846": "",
+    "src": "/src/assets/you_cant_not_advance.mp4",
+    "width": "0",
+    "autoplay": true,
+    "controls": false,
+    "controlBar": false,
+    "initChildren": false,
+    "createEl": false,
+    "evented": false,
+    "reportTouchActivity": false
+  }
+}
