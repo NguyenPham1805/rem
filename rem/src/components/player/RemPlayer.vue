@@ -554,7 +554,7 @@ const createPlayer = (source: string): void => {
     player.value = videojs(
       playerRef.value!,
       {
-        autoplay: !isMobile(),
+        autoplay: true,
         controls: false,
         controlBar: false,
         sources: [{ src: props.source! }]
@@ -562,7 +562,10 @@ const createPlayer = (source: string): void => {
       function () {
         this.on('timeupdate', () => {
           currentTime.value = this.currentTime() || 0
-          if (duration.value === 0) duration.value = this.duration() || 0
+        })
+        this.on('loadeddata', () => {
+          currentTime.value = this.currentTime() || 0
+          duration.value = this.duration() || 0
         })
         this.on('playing', () => {
           isPause.value = this.paused()
