@@ -7,5 +7,6 @@ export const userGetters: GetterTree<UserState, RootState> = {
   getTheme: (state): boolean => state.isDarkTheme,
   getError: (state): string | null => state.error,
   getSignInState: (state): boolean => state.isSignInOpen,
-  getLoading: (state): boolean => state.isLoading
+  getLoading: (state): boolean => state.isLoading,
+  getInteraction: (state): boolean => state.isInteraction
 }

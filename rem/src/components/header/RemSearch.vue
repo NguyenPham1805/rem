@@ -35,7 +35,7 @@
           @input="handleSearch"
         />
 
-        <button class="absolute right-2 top-2" v-if="keyword.length" @click="handleClearInput">
+        <button class="absolute right-2 top-2" v-if="keyword.length" @click="handleClearInput" type="button">
           <span
             class="material-icons-outlined translate-y-[1px] text-[13px] leading-none font-light bg-rem-color bg-opacity-25 z-10 rounded-full"
           >
@@ -82,7 +82,10 @@
               class="flex gap-1 py-2 px-1"
               :to="{ name: 'Watch', params: { slug: item.slug } }"
             >
-              <img class="w-24 object-cover" v-lazy="imgPipe(item.thumb_url, API_URL)" />
+              <img
+                class="w-24 object-cover flex-shrink-0"
+                v-lazy="item.thumb_url"
+              />
 
               <div class="flex flex-col flex-wrap p-1">
                 <h3 class="text-lg hover:text-rem-color leading-tight font-semibold break-line-2">
@@ -147,12 +150,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { Item } from '../../shared/types/film.interface'
-import { getSearch } from '../../shared/services/film.service'
-import { imgPipe } from '../../shared/utils'
-import { API_URL } from '../../shared/constant'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { getSearch } from '../../shared/services/film.service';
+import { Item } from '../../shared/types/film.interface';
 
 defineProps<{ isOpen: boolean }>()
 const emit = defineEmits(['close'])

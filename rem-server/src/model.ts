@@ -5,12 +5,13 @@ import { DataResponse, Source } from './type'
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') })
 
-const instance = axios.create({
-  baseURL: process.env.API_URL_DATA
-})
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
 
+const instance = axios.create({
+  baseURL: process.env.API_URL_DATA,
+})
 const instance1 = axios.create({
-  baseURL: process.env.API_URL1
+  baseURL: process.env.API_URL1,
 })
 
 class Model {
@@ -32,10 +33,7 @@ class Model {
       .catch(() => null)
   }
 
-  public static search = async (
-    q: string,
-    page: number = 1
-  ): Promise<DataResponse> => {
+  public static search = async (q: string, page: number = 1): Promise<DataResponse> => {
     return instance
       .get(`tim-kiem.json?keyword=${q}&page=${page}`)
       .then(({ data }) => data)
@@ -55,7 +53,10 @@ class Model {
         `danh-sach/${slug}.json?page=${page}&slug=${slug}&country=${country}&sort_field=${sortField}&category=${category}&year=${year}`
       )
       .then(({ data }) => data)
-      .catch(() => null)
+      .catch((error) => {
+        console.log(error)
+        return null
+      })
   }
 }
 

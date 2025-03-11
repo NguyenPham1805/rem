@@ -150,17 +150,17 @@
 </template>
 
 <script lang="ts" setup>
+import { signOut } from '@firebase/auth'
 import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
-import { signOut } from '@firebase/auth'
+import { auth } from '../../shared/firebase'
+import { headerRoutes } from '../../shared/headerRouter'
+import { User, UserState } from '../../shared/types/user.interface'
+import { UserAction } from '../../store/user/user.actions'
 import RemMobileSidebar from './RemMobileSidebar.vue'
 import RemSearch from './RemSearch.vue'
 import RemSignInForm from './RemSignInForm.vue'
-import { headerRoutes } from '../../shared/headerRouter'
-import { User, UserState } from '../../shared/types/user.interface'
-import { auth } from '../../shared/firebase'
-import { UserAction } from '../../store/user/user.actions'
 
 const route = useRoute()
 const store = useStore<UserState>()

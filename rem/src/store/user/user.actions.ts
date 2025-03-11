@@ -5,7 +5,8 @@ import { UserMutation } from './user.mutations'
 
 export enum UserAction {
   TOGGLE_SIGN_IN = '@User/ToggleSignIn',
-  SET_USER = '@User/Set'
+  SET_USER = '@User/Set',
+  INTERACTION = '@User/Interaction'
 }
 
 export const userActions: ActionTree<UserState, RootState> = {
@@ -14,5 +15,8 @@ export const userActions: ActionTree<UserState, RootState> = {
   },
   [UserAction.SET_USER]({ commit }, payload: User | null) {
     commit(UserMutation.SET_USER, payload)
+  },
+  [UserAction.INTERACTION]({ commit }) {
+    commit(UserMutation.INTERACTION)
   }
 }

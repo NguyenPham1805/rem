@@ -62,12 +62,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
 import { addDoc, collection, doc, serverTimestamp, updateDoc } from '@firebase/firestore'
-import { uploadBytesResumable, ref as fireStoreRef, getDownloadURL } from '@firebase/storage'
-import { toSlugPipe } from '../../shared/utils'
+import { ref as fireStoreRef, getDownloadURL, uploadBytesResumable } from '@firebase/storage'
+import { ref } from 'vue'
 import { db, storage } from '../../shared/firebase'
 import { User } from '../../shared/types/user.interface'
+import { toSlugPipe } from '../../shared/utils'
 
 const props = defineProps<{ filmId: string; user: User | null; replyForId: string | null }>()
 const emits = defineEmits(['comment'])

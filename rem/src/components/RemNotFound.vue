@@ -7,7 +7,7 @@
       @mousemove="handleMouseMove"
     >
       <p class="font-light text-center max-w-[85%] sm:text-lg">
-        Bạn vừa lạc isekai vào thế giới alime. Nhưng rất tiếc thế giới này không có gì :((
+        Bạn vừa isekai vào thế giới alime. Nhưng rất tiếc, thế giới này không có gì :((
       </p>
 
       <h1 class="text-white text-6xl sm:text-8xl font-thin">404</h1>
@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onUnmounted, onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const container = ref<HTMLDivElement | null>(null)

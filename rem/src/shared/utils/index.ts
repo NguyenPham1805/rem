@@ -1,10 +1,5 @@
-export const imgPipe = (url: string, apiUrl?: string): string => {
-  if (!url) return ''
-  if (apiUrl) return apiUrl + 'image?url=' + url
-  return new URL(url, import.meta.url).href
-}
-
 export const toSlugPipe = (str: string, separator?: string): string => {
+  if (!str) return ''
   str = str
     .toLowerCase()
     .replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a')

@@ -27,7 +27,7 @@
     @click="(e) => handleClickCapture(e)"
     v-else
   >
-    <video id="mainVideo" ref="playerRef" @waiting="isDataLoading = true"></video>
+    <video id="mainVideo" :poster="thumbnail" ref="playerRef" @waiting="isDataLoading = true"></video>
 
     <div
       class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center"
@@ -330,26 +330,22 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, onBeforeUnmount } from 'vue'
-import {} from 'vue-router'
 import {
-  setDoc,
-  serverTimestamp,
-  doc,
-  updateDoc,
-  getDoc,
-  DocumentData,
-  DocumentSnapshot
+doc, DocumentData,
+DocumentSnapshot, getDoc, serverTimestamp, setDoc, updateDoc
 } from '@firebase/firestore'
 import videojs, { VideoJsPlayer } from 'video.js'
-import RemFlashToasts, { TypeToast } from './RemFlashToasts.vue'
-import { timePipe } from '../../shared/utils'
+import { onBeforeUnmount, ref, watch } from 'vue'
 import { db } from '../../shared/firebase'
+import { timePipe } from '../../shared/utils'
+import RemFlashToasts, { TypeToast } from './RemFlashToasts.vue'
 
 type PopupActiveType = 'menu' | 'speed' | 'quality' | 'subtitles'
 
 interface PlayerProp {
   uid?: string
+  thumbnail?: string
+  userInteraction: boolean
   filmId: string | null
   epName: string | null
   name: string | null
@@ -554,12 +550,13 @@ const createPlayer = (source: string): void => {
     player.value = videojs(
       playerRef.value!,
       {
-        autoplay: true,
+        autoplay: props.userInteraction,
         controls: false,
         controlBar: false,
-        sources: [{ src: props.source! }]
+        sources: [{ src: props.source! }],
       },
       function () {
+        isPause.value = !props.userInteraction
         this.on('timeupdate', () => {
           currentTime.value = this.currentTime() || 0
         })

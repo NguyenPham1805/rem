@@ -125,10 +125,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { headerRoutes } from '../../shared/headerRouter'
-import { datePipe } from '../../shared/utils'
-import { User } from '../../shared/types/user.interface'
+import { ref } from 'vue';
+import { headerRoutes } from '../../shared/headerRouter';
+import { User } from '../../shared/types/user.interface';
+import { datePipe } from '../../shared/utils';
 
 defineProps<{ isOpen: boolean; user: User | null }>()
 defineEmits(['close', 'sign-out'])

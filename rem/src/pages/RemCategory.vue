@@ -19,14 +19,14 @@
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { Item } from '../shared/types/film.interface'
-import RemTitle from '../components/RemTitle.vue'
 import RemList from '../components/RemList.vue'
-import RemScrolltopBtn from '../components/RemScrolltopBtn.vue'
 import RemListSkeleton from '../components/RemListSkeleton.vue'
 import RemNotFound from '../components/RemNotFound.vue'
-import { getCategoryAndCountries } from '../shared/services/film.service'
+import RemScrolltopBtn from '../components/RemScrolltopBtn.vue'
+import RemTitle from '../components/RemTitle.vue'
 import { COUNTRIES, GENRES } from '../shared/constant'
+import { getCategoryAndCountries } from '../shared/services/film.service'
+import { Item } from '../shared/types/film.interface'
 
 const route = useRoute()
 
@@ -69,8 +69,8 @@ const handleScroll = () => {
 }
 
 const getTitle = () => {
-  const genre = GENRES.find((genre) => (genre.slug = slug.value))?.name
-  const country = COUNTRIES.find((genre) => (genre.slug = slug.value))?.name
+  const genre = GENRES.find((genre) => (genre.slug === slug.value))?.name
+  const country = COUNTRIES.find((genre) => (genre.slug === slug.value))?.name
 
   if (!genre && !country) {
     isError.value = true

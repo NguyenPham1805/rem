@@ -47,7 +47,7 @@
           >
             <img
               class="w-28 sm:w-32 md:w-36 object-cover"
-              v-lazy="imgPipe(item.thumb_url, API_URL)"
+              v-lazy="item.thumb_url"
             />
 
             <div class="flex flex-col gap-1">
@@ -81,24 +81,22 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, computed, onUnmounted, watch } from 'vue'
-import { useStore } from 'vuex'
 import {
-  collection,
-  DocumentData,
-  getDocs,
-  limit,
-  orderBy,
-  query,
-  QueryDocumentSnapshot
+    collection,
+    DocumentData,
+    getDocs,
+    limit,
+    orderBy,
+    query,
+    QueryDocumentSnapshot
 } from '@firebase/firestore'
-import RemTitle from '../components/RemTitle.vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { useStore } from 'vuex'
 import RemEpHistory from '../components/RemEpHistory.vue'
-import { imgPipe } from '../shared/utils'
+import RemTitle from '../components/RemTitle.vue'
+import { db } from '../shared/firebase'
 import { FilmHistory } from '../shared/types/film.interface'
 import { User } from '../shared/types/user.interface'
-import { db } from '../shared/firebase'
-import { API_URL } from '../shared/constant'
 import { UserAction } from '../store/user/user.actions'
 
 const store = useStore<User>()

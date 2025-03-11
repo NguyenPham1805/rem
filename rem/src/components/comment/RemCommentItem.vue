@@ -78,12 +78,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
 import { doc, updateDoc } from '@firebase/firestore'
-import { timeLeftPipe, reactionPipe, checkReactionPipe } from '../../shared/utils'
+import { ref } from 'vue'
+import { db } from '../../shared/firebase'
 import { Comment, CommentReply } from '../../shared/types/comment.interface'
 import { User } from '../../shared/types/user.interface'
-import { db } from '../../shared/firebase'
+import { checkReactionPipe, reactionPipe, timeLeftPipe } from '../../shared/utils'
 
 const props = defineProps<{
   isReply: boolean

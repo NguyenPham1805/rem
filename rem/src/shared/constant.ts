@@ -1,6 +1,7 @@
 import { Link } from './types/film.interface'
 
-export const API_URL = import.meta.env.VITE_API_URL as string
+// export const API_URL = 'https://remlove.herokuapp.com/api/v1/'
+export const API_URL = import.meta.env.VITE_API_URL
 
 export const GENRES: Link[] = [
   { name: 'Hành động', slug: 'hanh-dong' },
@@ -65,27 +66,34 @@ export const COUNTRIES: Link[] = [
 ]
 
 export const FILM_TYPE: Link[] = [
-  { name: 'Phim mới', slug: 'phim-moi' },
-  { name: 'Phim sắp chiếu', slug: 'phim-sap-chieu' },
-  { name: 'Phim bộ', slug: 'phim-bo' },
-  { name: 'Phim lẻ', slug: 'phim-le' },
-  { name: 'Phim vietsub', slug: 'phim-vietsub' },
-  { name: 'Phim thuyết minh', slug: 'phim-thuyet-minh' },
-  { name: 'Phim lồng tiếng', slug: 'phim-long-tieng' },
-  { name: 'Phim bộ đang chiếu', slug: 'phim-bo-dang-chieu' },
-  { name: 'Phim bộ hoàn thành', slug: 'phim-bo-hoan-thanh' },
-  { name: 'TV shows', slug: 'tv-shows' },
-  { name: 'Anime', slug: 'hoat-hinh' },
-  { name: 'Subteam', slug: 'subteam' }
+  // { name: 'Phim mới', slug: 'phim-moi' },
+  // { name: 'Phim sắp chiếu', slug: 'phim-sap-chieu' },
+  // { name: 'Phim bộ', slug: 'phim-bo' },
+  // { name: 'Phim lẻ', slug: 'phim-le' },
+  // { name: 'Phim vietsub', slug: 'phim-vietsub' },
+  // { name: 'Phim thuyết minh', slug: 'phim-thuyet-minh' },
+  // { name: 'Phim lồng tiếng', slug: 'phim-long-tieng' },
+  // { name: 'Phim bộ đang chiếu', slug: 'phim-bo-dang-chieu' },
+  // { name: 'Phim bộ hoàn thành', slug: 'phim-bo-hoan-thanh' },
+  // { name: 'TV shows', slug: 'tv-shows' },
+  // { name: 'Anime', slug: 'hoat-hinh' },
+  // { name: 'Subteam', slug: 'subteam' }
+  { name: 'Anime', slug: 'anime' },
+  { name: 'Phim lẻ', slug: 'single' },
+  { name: 'Phim bộ', slug: 'series' },
+  { name: 'TV shows', slug: 'tvshows' }
 ]
 
 export const SORT_FILM: Link[] = [
-  { name: 'Phim mới nhất', slug: '_id' },
-  { name: 'Thời gian cập nhật', slug: 'modified.time' },
+  { name: 'Phim mới nhất', slug: 'newest' },
+  { name: 'Thời gian cập nhật', slug: 'new-update' },
   { name: 'Năm sản xuất', slug: 'year' }
 ]
 
 export const YEAR: Link[] = [
+  { name: '2025', slug: '2025' },
+  { name: '2024', slug: '2024' },
+  { name: '2023', slug: '2023' },
   { name: '2022', slug: '2022' },
   { name: '2021', slug: '2021' },
   { name: '2020', slug: '2020' },

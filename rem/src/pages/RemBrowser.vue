@@ -19,14 +19,14 @@
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { Item } from '../shared/types/film.interface'
-import RemTitle from '../components/RemTitle.vue'
 import RemList from '../components/RemList.vue'
-import RemScrolltopBtn from '../components/RemScrolltopBtn.vue'
 import RemListSkeleton from '../components/RemListSkeleton.vue'
 import RemNotFound from '../components/RemNotFound.vue'
-import { getList } from '../shared/services/film.service'
+import RemScrolltopBtn from '../components/RemScrolltopBtn.vue'
+import RemTitle from '../components/RemTitle.vue'
 import { headerRoutes } from '../shared/headerRouter'
+import { getList } from '../shared/services/film.service'
+import { Item } from '../shared/types/film.interface'
 
 const route = useRoute()
 
@@ -39,6 +39,7 @@ const slug = ref<string>(route.params.slug as string)
 const containerRef = ref<HTMLDivElement | null>(null)
 const title = ref<string>('Rem | Phim mới')
 const isError = ref<boolean>(false)
+let scrollId: NodeJS.Timeout | null = null
 
 const getListBrowser = async (page: number) => {
   loading.value = true
@@ -52,16 +53,16 @@ const getListBrowser = async (page: number) => {
 
   switch (slug.value) {
     case 'tv-series':
-      _slug = 'phim-bo'
+      _slug = 'series'
       break
-    case 'tv-shows':
-      _slug = 'tv-shows'
+    case 'tvshows':
+      _slug = 'tvshows'
       break
     case 'movie':
-      _slug = 'phim-le'
+      _slug = 'single'
       break
     case 'anime':
-      _slug = 'hoat-hinh'
+      _slug = 'anime'
       break
   }
 
@@ -80,7 +81,10 @@ const handleScroll = () => {
     document.documentElement.scrollTop + window.innerHeight
   ) {
     if (loading.value || currentPage.value >= (totalPages.value || 1)) return
-    getListBrowser(++currentPage.value)
+    if (!scrollId) getListBrowser(++currentPage.value)
+    scrollId = setTimeout(() => {
+      if (scrollId) scrollId = null
+    }, 1000);
   }
 }
 
@@ -91,6 +95,7 @@ const getTitle = () => {
 }
 
 onMounted(() => {
+  window.scroll({top: 0, behavior: 'instant'})
   getListBrowser(currentPage.value)
   getTitle()
 })

@@ -1,12 +1,12 @@
 <template>
   <div
-    class="flex flex-col transition-all items-center w-72 sm:w-80 fixed p-3 pt-8 bg-rem-dark rounded-xl left-[50%] translate-x-[-50%] z-50 duration-500"
-    :style="[isOpen ? { top: '70px' } : { top: '-500px' }]"
+    class="flex flex-col transition-all items-center w-80 sm:w-96 fixed px-6 py-12 bg-rem-dark rounded-xl left-[50%] translate-x-[-50%] z-50 duration-500"
+    :style="[isOpen ? { top: '100px' } : { top: '-500px' }]"
   >
-    <button class="absolute top-1 right-2" @click="closeSignIn">
-      <span class="material-icons-outlined text-2xl md:text-[28px] hover:text-rem-color"
-        >close</span
-      >
+    <button class="absolute top-4 right-4" @click="closeSignIn">
+      <span class="material-icons-outlined text-2xl md:text-[28px] hover:text-rem-color">
+        close
+      </span>
     </button>
 
     <img class="w-24" :src="'/rem-logo.png'" />
@@ -16,15 +16,15 @@
     </h3>
 
     <p class="text-gray-400 mt-4 text-center">
-      Trên <span class="text-rem-color">16k</span> phim nhiều thể loại. và vẫn đang được cập nhật
+      Trên <span class="text-rem-color">27k</span> phim nhiều thể loại. và vẫn đang được cập nhật
       mỗi ngày
     </p>
 
-    <div class="flex flex-col px-4 gap-3 mt-4">
+    <div class="flex flex-col px-4 gap-3 mt-4 w-full">
       <h3 class="text-rem-color">Bạn có thể đăng nhập với:</h3>
 
       <button
-        class="flex items-center justify-center gap-2 p-1 border-2 border-rem text-xl hover:bg-rem hover:text-rem-so-dark transition font-normal"
+        class="flex items-center justify-center gap-2 p-1 rounded w-full border-2 border-rem text-xl hover:bg-rem hover:text-rem-so-dark transition font-normal"
         @click="handleFBSignIn"
       >
         <img class="w-10" :src="'/icon-facebook.png'" />
@@ -32,7 +32,7 @@
       </button>
 
       <button
-        class="flex items-center justify-center gap-2 p-1 border-2 border-white text-xl hover:bg-white hover:text-rem-so-dark transition font-normal"
+        class="flex items-center justify-center gap-2 p-1 rounded w-full border-2 border-white text-xl hover:bg-white hover:text-rem-so-dark transition font-normal"
         @click="handleGGSignIn"
       >
         <img class="w-10" :src="'/icon-google.png'" />
@@ -49,17 +49,17 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
 import {
   AuthProvider,
-  signInWithPopup,
+  FacebookAuthProvider,
   GoogleAuthProvider,
-  FacebookAuthProvider
+  signInWithPopup
 } from '@firebase/auth'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 import { auth } from '../../shared/firebase'
-import { UserAction } from '../../store/user/user.actions'
 import { User } from '../../shared/types/user.interface'
+import { UserAction } from '../../store/user/user.actions'
 
 const store = useStore<User>()
 const isOpen = computed<boolean>(() => store.getters.getSignInState)

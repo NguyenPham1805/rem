@@ -6,7 +6,9 @@
 
     <rem-player
       :loading="loading"
+      :userInteraction="userInteraction"
       :uid="user?.uid"
+      :thumbnail="film?.movie.poster_url"
       :film-id="film?.movie._id || null"
       :prev-ep="prevEp"
       :prev-ep-name="prevEpName"
@@ -32,19 +34,19 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, onMounted, computed } from 'vue'
+import { User } from '@firebase/auth'
+import { collection, doc, onSnapshot, query, serverTimestamp, setDoc } from '@firebase/firestore'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { User } from '@firebase/auth'
-import { setDoc, doc, collection, query, onSnapshot, serverTimestamp } from '@firebase/firestore'
-import RemTitle from '../components/RemTitle.vue'
+import RemComment from '../components/comment/RemComment.vue'
 import RemPlayer from '../components/player/RemPlayer.vue'
 import RemInfo from '../components/RemInfo.vue'
-import RemComment from '../components/comment/RemComment.vue'
 import RemNotFound from '../components/RemNotFound.vue'
-import { FilmResponse, Source } from '../shared/types/film.interface'
-import { getFilm as getFilmService } from '../shared/services/film.service'
+import RemTitle from '../components/RemTitle.vue'
 import { db } from '../shared/firebase'
+import { getFilm as getFilmService } from '../shared/services/film.service'
+import { FilmResponse, Source } from '../shared/types/film.interface'
 
 const route = useRoute()
 const router = useRouter()
@@ -61,6 +63,7 @@ const filmId = ref<string | null>(null)
 const film = ref<FilmResponse | null>(null)
 const epHasWatched = ref<number[]>([])
 const user = computed<User | null>(() => store.getters.getUser)
+const userInteraction = computed<boolean>(() => store.getters.getInteraction)
 
 const getFilm = async (): Promise<void | Source> => {
   loading.value = true
@@ -127,7 +130,7 @@ onMounted(() => {
                 type,
                 category,
                 originName,
-                thumb_url: thumb_url.split('/')[thumb_url.split('/').length - 1] || '',
+                thumb_url,
                 createdAt: serverTimestamp(),
                 epLastest: currentEp.value || 0,
                 epLastestName: prevEpName.value

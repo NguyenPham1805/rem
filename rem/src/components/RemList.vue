@@ -15,8 +15,9 @@
           <div
             class="img pb-[145%] bg-rem-quiet-dark bg-cover"
             lazy="loaded"
-            v-lazy:background-image="imgPipe(item.thumb_url, API_URL)"
+            v-lazy:background-image="item.thumb_url"
           ></div>
+          <!-- :style="`background: url(${item.thumb_url}); background-size:cover`" -->
 
           <span
             class="px-2 py-2 text-sm lg:text-base absolute bottom-8 z-10 ts-lg bg-gradient-to-t from-rem-dark to-transparent w-full"
@@ -36,9 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Item } from '../shared/types/film.interface'
-import { imgPipe } from '../shared/utils'
-import { API_URL } from '../shared/constant'
+import { Item } from '../shared/types/film.interface';
 
 defineProps<{ list: Item[] }>()
 </script>

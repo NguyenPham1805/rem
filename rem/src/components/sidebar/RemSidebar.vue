@@ -12,16 +12,16 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, watch } from 'vue'
-import { computed } from '@vue/reactivity'
 import { collection, getDocs, limit, onSnapshot, orderBy, query, where } from '@firebase/firestore'
-import RemList from './RemList.vue'
-import RemTitle from '../RemTitle.vue'
-import { DataResponse, FilmHistory, FilmInfoFromFirebase } from '../../shared/types/film.interface'
-import { getList } from '../../shared/services/film.service'
-import { db } from '../../shared/firebase'
+import { computed } from '@vue/reactivity'
+import { onMounted, ref, watch } from 'vue'
 import { useStore } from 'vuex'
+import { db } from '../../shared/firebase'
+import { getList } from '../../shared/services/film.service'
+import { DataResponse, FilmHistory, FilmInfoFromFirebase } from '../../shared/types/film.interface'
 import { User } from '../../shared/types/user.interface'
+import RemTitle from '../RemTitle.vue'
+import RemList from './RemList.vue'
 
 const store = useStore<User>()
 

@@ -33,7 +33,10 @@
           class="flex gap-2 p-1 hover:bg-gray-600 hover:bg-opacity-30"
           :to="{ name: 'Watch', params: { slug: film.slug } }"
         >
-          <img class="w-16 rounded object-cover" v-lazy="imgPipe(film.thumb_url, API_URL)" />
+          <img
+            class="w-16 rounded object-cover flex-shrink-0"
+            v-lazy="film.thumb_url"
+          />
 
           <div class="flex flex-col">
             <h2 class="break-line text-lg">{{ film.name }}</h2>
@@ -56,7 +59,10 @@
           class="flex gap-2 p-1 hover:bg-gray-600 hover:bg-opacity-30"
           :to="'/watch/' + film.slug"
         >
-          <img class="w-16 rounded object-cover" v-lazy="imgPipe(film.thumb_url, API_URL)" />
+          <img
+            class="w-16 rounded object-cover flex-shrink-0"
+            v-lazy="film.thumb_url"
+          />
 
           <div class="flex flex-col">
             <h2 class="break-line text-lg">{{ film.name }}</h2>
@@ -83,7 +89,10 @@
             query: { episode_index: film.epLastest }
           }"
         >
-          <img class="w-16 rounded object-cover" v-lazy="imgPipe(film.thumb_url, API_URL)" />
+          <img
+            class="w-16 rounded object-cover flex-shrink-0"
+            v-lazy="film.thumb_url"
+          />
 
           <div class="flex flex-col">
             <h2 class="break-line text-lg">{{ film.name }}</h2>
@@ -99,9 +108,7 @@
 </template>
 
 <script lang="ts" setup>
-import { FilmHistory, FilmInfoFromFirebase, Item } from '../../shared/types/film.interface'
-import { imgPipe } from '../../shared/utils'
-import { API_URL } from '../../shared/constant'
+import { FilmHistory, FilmInfoFromFirebase, Item } from '../../shared/types/film.interface';
 
 defineProps<{
   filmsUnComing?: Item[]

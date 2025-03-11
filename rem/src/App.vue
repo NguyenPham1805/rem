@@ -13,18 +13,27 @@
 </template>
 
 <script lang="ts" setup>
-import { useStore } from 'vuex'
 import { onAuthStateChanged } from '@firebase/auth'
-import { setDoc, doc } from 'firebase/firestore'
-import RemHeader from './components/header/RemHeader.vue'
+import { doc, setDoc } from 'firebase/firestore'
+import { useStore } from 'vuex'
 import RemFooter from './components/footer/RemFooter.vue'
+import RemHeader from './components/header/RemHeader.vue'
 import RemSidebar from './components/sidebar/RemSidebar.vue'
-import { auth } from './shared/firebase'
+import { auth, db } from './shared/firebase'
 import { RootState } from './store'
 import { UserAction } from './store/user/user.actions'
-import { db } from './shared/firebase'
 
 const store = useStore<RootState>()
+
+const enableAutoplay = () => {
+  store.dispatch(UserAction.INTERACTION)
+  document.removeEventListener('click', enableAutoplay);
+  document.removeEventListener('keydown', enableAutoplay);
+};
+
+// Listen for user actions
+document.addEventListener('click', enableAutoplay);
+document.addEventListener('keydown', enableAutoplay);
 
 onAuthStateChanged(auth, (user) => {
   if (user) {

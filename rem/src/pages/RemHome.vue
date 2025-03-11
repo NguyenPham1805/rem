@@ -47,7 +47,7 @@ const getHome = async (page: number): Promise<void> => {
   document.title = 'Rem | Phim Mới Cập Nhật' + (page > 1 ? ' | Trang ' + page : '')
   isLoading.value = true
   isError.value = false
-  getList('phim-moi', { page })
+  getList(undefined, { page })
     .then((res) => {
       totalPages.value = Math.ceil(res.pagination.totalItems / res.pagination.totalItemsPerPage)
       filmResponse.value = res

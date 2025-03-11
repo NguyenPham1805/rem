@@ -145,7 +145,7 @@
     </button>
   </div>
 
-  <div ref="containerRef" v-if="!isError">
+  <div class="mt-4" ref="containerRef" v-if="!isError">
     <rem-list-skeleton v-if="loading" />
 
     <rem-list :list="list" />
@@ -159,17 +159,17 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onMounted, watch, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import RemTitle from '../components/RemTitle.vue'
-import RemSelect from '../components/RemSelect.vue'
 import RemList from '../components/RemList.vue'
 import RemListSkeleton from '../components/RemListSkeleton.vue'
 import RemScrolltopBtn from '../components/RemScrolltopBtn.vue'
+import RemSelect from '../components/RemSelect.vue'
+import RemTitle from '../components/RemTitle.vue'
 import { filter as _filter } from '../shared/constant'
-import { keySelectPipe, checkObjEmpty, filterObj } from '../shared/utils'
+import { getList, getSearch } from '../shared/services/film.service'
 import { Item, Link } from '../shared/types/film.interface'
-import { getSearch, getList } from '../shared/services/film.service'
+import { checkObjEmpty, filterObj, keySelectPipe } from '../shared/utils'
 
 type PopupFilterType = 'slug' | 'category' | 'country' | 'year' | 'sortField' | 'main'
 
@@ -190,6 +190,7 @@ const mainPopupRef = ref<HTMLUListElement | null>(null)
 const menuPopupRef = ref<HTMLUListElement[] | null>(null)
 const popupFilterActive = ref<PopupFilterType>('main')
 const popupHeight = ref<number>(0)
+let currentQuery: Record<string, any> = {}
 
 const popups: { [key: string]: any } = {
   main: mainPopupRef,
@@ -214,14 +215,8 @@ const handleSearch = (page: number, merge: boolean = false): void => {
       .catch(() => (isError.value = true))
       .finally(() => (loading.value = false))
   } else {
-    getList(route.query.slug as any, {
-      slug: route.query.slug,
-      category: route.query.category,
-      sortField: route.query.sortField,
-      country: route.query.country,
-      year: route.query.year,
-      page
-    })
+    currentQuery.page = page
+    getList(route.query.slug as any, currentQuery)
       .then((res) => {
         if (merge) list.value.push(...res.items)
         else list.value = res.items
@@ -268,7 +263,6 @@ const handleDeleteFilter = (key: string): void => {
 }
 
 const handleFilter = (): void => {
-  loading.value = true
   if (checkObjEmpty(filter)) return
   router.push({
     query: {
@@ -283,7 +277,7 @@ const handleFilter = (): void => {
 
 const handleSearchByKeyword = (): void => {
   loading.value = true
-  router.push({ query: { q: keyword.value } })
+  router.push({ query: { ...currentQuery, q: keyword.value } })
 }
 
 const handleScroll = () => {
@@ -302,7 +296,17 @@ window.addEventListener('scroll', handleScroll)
 watch(
   () => route.query,
   () => {
+    loading.value = true
     list.value = []
+    currentQuery = {
+      slug: route.query.slug,
+      category: route.query.category,
+      sortField: route.query.sortField,
+      country: route.query.country,
+      year: route.query.year,
+      page: route.query.page,
+      keyword: route.query.q
+    }
     if (route.name !== 'Search') return
     handleSearch(currentPage.value)
   }

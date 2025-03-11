@@ -3,7 +3,7 @@
     <div class="flex flex-wrap">
       <router-link
         class="mx-1 text-rem text-sm"
-        v-for="tag in info?.category"
+        v-for="tag in info.category"
         :key="toSlugPipe(tag.name)"
         :to="{ name: 'Category', params: { path: 'genres', slug: toSlugPipe(tag.name) } }"
       >
@@ -164,12 +164,12 @@
       </div>
     </div>
 
-    <h2 class="flex items-center w-fit my-3 text-lg text-rem-color border-b-2 border-rem-color">
+    <!-- <h2 class="flex items-center w-fit my-3 text-lg text-rem-color border-b-2 border-rem-color">
       <span class="material-icons-outlined text-rem-color text-xl"> interpreter_mode </span>
       Diễn viên/lồng tiếng
-    </h2>
+    </h2> -->
 
-    <div class="p-1">
+    <!-- <div class="p-1">
       <div class="bg-rem-so-dark bg-opacity-50 p-2">
         <template v-if="info.actor[0].length">
           <span
@@ -182,7 +182,7 @@
 
         <p class="text-rem-color" v-else>N/A</p>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <div class="flex flex-col p-1 mt-2 gap-4" v-else>
@@ -221,21 +221,21 @@
 </template>
 
 <script lang="ts" setup>
+import { doc, getDoc, setDoc, updateDoc } from '@firebase/firestore'
 import { computed, ref, watch } from 'vue'
 import { useStore } from 'vuex'
-import { doc, getDoc, setDoc, updateDoc } from '@firebase/firestore'
-import { DataLink, FilmInfoFromFirebase, FilmInfo } from '../shared/types/film.interface'
-import { User } from '../shared/types/user.interface'
 import { db } from '../shared/firebase'
+import { DataLink, FilmInfo, FilmInfoFromFirebase } from '../shared/types/film.interface'
+import { User } from '../shared/types/user.interface'
 import {
-  toSlugPipe,
-  typeToTag,
-  contentPipe,
-  checkRatingPipe,
   checkFolowPipe,
+  checkRatingPipe,
+  checkReactionPipe,
+  contentPipe,
   ratingPipe,
   reactionPipe,
-  checkReactionPipe
+  toSlugPipe,
+  typeToTag
 } from '../shared/utils'
 
 interface Props {
@@ -263,7 +263,6 @@ const infoFromFirebase = ref<FilmInfoFromFirebase | null>(null)
 const folows = computed(() => infoFromFirebase.value?.folows)
 const rating = computed(() => infoFromFirebase.value?.rating)
 const reaction = computed(() => infoFromFirebase.value?.reaction)
-
 const user = computed<User | null>(() => store.getters.getUser)
 
 const handleRating = (star: number): void => {
@@ -326,7 +325,7 @@ watch(
         name: props.info?.name || '',
         slug: props.info?.slug || '',
         thumb_url:
-          props.info?.thumb_url.split('/')[props.info?.thumb_url.split('/').length - 1] || '',
+          props.info?.thumb_url!,
         year: props.info?.year || new Date().getFullYear(),
         country: props.info?.country[0].name || '',
         folows: {},

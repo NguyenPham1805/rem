@@ -8,6 +8,7 @@ export interface User {
 
 export interface UserState {
   user: User | null
+  isInteraction: boolean
   isDarkTheme: boolean
   isSignInOpen: boolean
   isLoading: boolean

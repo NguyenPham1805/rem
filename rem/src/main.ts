@@ -1,13 +1,15 @@
+import { createApp } from 'vue'
+import VueLazyloadNext from 'vue-lazyload-next'
+
 import App from 'rem/App.vue'
 import router from 'rem/router'
 import store from 'rem/store'
-import { createApp } from 'vue'
-import VueLazyloadNext from 'vue-lazyload-next'
-import './index.css'
 import { dropdownDirective } from 'rem/shared/directives/dropdown.directive'
 import { mbDropdownDirective } from 'rem/shared/directives/mb-dropdown.directive'
-import { scrolltopDirective } from 'rem/shared/directives/scrolltop.derective'
-import { clickAwayDirective } from './shared/directives/click-away.directive'
+import { scrolltopDirective } from 'rem/shared/directives/scrolltop.directive'
+import { clickAwayDirective } from 'rem/shared/directives/click-away.directive'
+
+import './index.css'
 
 const rem = createApp(App)
 
